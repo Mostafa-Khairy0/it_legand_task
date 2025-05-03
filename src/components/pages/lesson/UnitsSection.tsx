@@ -10,7 +10,7 @@ export const UnitsSection = ({
 }) => {
   return (
     <div
-      className="col-span-1 row-span-1 md:row-span-2 p-[10px] rounded-lg"
+      className="row-start-3 md:row-start-1 md:row-end-4 md:col-start-3 md:col-span-1 p-[10px] rounded-lg"
       id="units-section"
     >
       <div className="text-[20px] font-bold">🎯 Course Highlights</div>

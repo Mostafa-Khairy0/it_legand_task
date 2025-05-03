@@ -26,7 +26,7 @@ export const LessonPage = ({
   return (
     <div className="px-[5px] py-[5px] sm:px-[10px] sm:py-[10px] md:px-[20px] md:py-[15px]">
       <div className="text-[28px] font-[700]">{lesson?.title}</div>
-      <div className="grid grid-cols-1 grid-row-[repeat(3,auto)] md:grid-cols-3 md:grid-rows-[repeat(2,auto)] gap-[5px]">
+      <div className="grid grid-cols-1 grid-row-[repeat(4,auto)] md:grid-cols-3 md:grid-rows-[repeat(3,auto)] gap-[5px]">
         <VideoSection
           lessonId={lessonId}
           commentsRef={commentsRef}

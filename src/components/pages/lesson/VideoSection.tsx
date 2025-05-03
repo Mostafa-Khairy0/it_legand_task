@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import { Fragment, RefObject } from "react";
 import { PdfDialog, VideoPlayer } from "@/components";
 import { useAppSelector } from "@/hooks";
 import { selectLessonById } from "@/store";
@@ -24,15 +24,18 @@ export const VideoSection = ({
   };
 
   return (
-    <div className="col-span-1 md:col-span-2 row-span-1">
-      {lesson && (
-        <VideoPlayer
-          src={lesson?.videoSrc}
-          poster={lesson?.videoPoster}
-          thumbnails={lesson?.videoThumbnails}
-        />
-      )}
-      <div className="flex flex-row items-center p-[10px] gap-[10px]">
+    <Fragment>
+      <div className="col-span-1 md:col-span-2 row-span-1 sticky md:static top-[10px] z-20">
+        {lesson && (
+          <VideoPlayer
+            src={lesson?.videoSrc}
+            poster={lesson?.videoPoster}
+            thumbnails={lesson?.videoThumbnails}
+            className=""
+          />
+        )}
+      </div>
+      <div className="col-span-1 md:col-span-2 row-span-1 flex flex-row items-center p-[10px] gap-[10px]">
         <div
           className="border-border border-2 w-[40px] h-[40px] rounded-full flex justify-center items-center"
           onClick={handleCommentsScroll}
@@ -47,6 +50,6 @@ export const VideoSection = ({
         </div>
         <PdfDialog pdfUrl={lesson?.materials?.at(0) ?? ""} />
       </div>
-    </div>
+    </Fragment>
   );
 };
