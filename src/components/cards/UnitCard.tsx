@@ -47,7 +47,9 @@ export const UnitCard = ({
                 <Separator orientation="horizontal" />
               </Fragment>
             ))}
-            {unit.examId && <ExamDialog examId={unit.examId} />}
+            {typeof unit.examId == "number" && (
+              <ExamDialog examId={unit.examId} />
+            )}
           </CardContent>
         </Fragment>
       )}

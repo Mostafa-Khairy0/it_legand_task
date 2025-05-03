@@ -27,3 +27,4 @@ export const CommentsSection = forwardRef(
     );
   }
 );
+CommentsSection.displayName = "CommentsSection";

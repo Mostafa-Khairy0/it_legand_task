@@ -11,7 +11,7 @@ import {
   useTransition,
 } from "react";
 import { useAppDispatch, useToast } from "@/hooks";
-import { addOneComment, removeComment, removeCommentFromLesson } from "@/store";
+import { addOneComment, removeComment } from "@/store";
 
 const initialState = {
   success: false,
@@ -80,3 +80,4 @@ export const SendCommentForm = forwardRef(
     );
   }
 );
+SendCommentForm.displayName = "SendCommentForm";
