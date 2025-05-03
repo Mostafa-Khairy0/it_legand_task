@@ -1,0 +1,7 @@
+export default function Unit() {
+  return (
+    <div className="flex justify-center items-center h-[100vh] w-[100vw] text-[60px]">
+      Unit Page
+    </div>
+  );
+}
