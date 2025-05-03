@@ -1,12 +1,15 @@
+import { RootState } from "@/store";
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
 export interface QuestionSlice {
   id: number;
   text: string;
-  choices: string;
+  choices: string[];
   createdAt: string;
-  examId: string;
+  examId: number;
+  selected?: string;
 }
+
 const questionAdapter = createEntityAdapter<QuestionSlice>();
 
 const questionSlice = createSlice({
@@ -18,6 +21,8 @@ const questionSlice = createSlice({
     setQuestions: questionAdapter.setAll,
   },
 });
+export const selectQuestionById = (id: number) => (state: RootState) =>
+  state.questions.entities[id];
 
 export const { addQuestions, updateQuestion, setQuestions } =
   questionSlice.actions;

@@ -1,66 +1,44 @@
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { useAppSelector, useBoolean } from "@/hooks";
+  ExamButton,
+  QuestionsCarousel,
+  DialogTitle,
+  SendExamButton,
+} from "@/components";
+import { useAppSelector, useBoolean, useClock } from "@/hooks";
 import { selectExamById } from "@/store";
-import { FlaskConical } from "lucide-react";
-import { MouseEventHandler } from "react";
-
-export const ExamButton = ({
-  examId,
-  onClick,
-}: {
-  examId: number;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-}) => {
-  const exam = useAppSelector(selectExamById(examId));
-  return (
-    <Button
-      variant="ghost"
-      className="flex flex-row items-center justify-between px-[10px] py-[25px] w-full bg-[#00000000]"
-      onClick={onClick}
-    >
-      <div className="flex flex-row items-center justify-center gap-[5px]">
-        <FlaskConical size={18} className="text-ring" />
-        <div className="text-ring">{exam.title}</div>
-      </div>
-      <div className="flex flex-row flex-wrap gap-[5px] max-w-[200px] justify-end">
-        <div className="text-chart-2 bg-green-200 p-[5px] rounded-sm">
-          {exam?.questions?.length ?? 0} Questions
-        </div>
-        <div className="text-destructive bg-red-200 p-[5px] rounded-sm">
-          {exam?.durationInMinutes ?? 0} Minutes
-        </div>
-      </div>
-    </Button>
-  );
-};
+import { formatClock } from "@/utils";
+import { AlarmClock } from "lucide-react";
 
 export const ExamDialog = ({ examId }: { examId: number }) => {
   const [open, { on, off }] = useBoolean();
+  const [timeEnd, { on: onTimeEnd }] = useBoolean(false);
+  const exam = useAppSelector(selectExamById(examId));
+  const clock = useClock({
+    durationInSeconds: exam.durationInMinutes * 60,
+    onFinish: onTimeEnd,
+  });
+
   return (
     <Dialog open={open} onOpenChange={(open) => (open ? on() : off())}>
       <DialogTrigger asChild>
         <ExamButton examId={examId} onClick={on} />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            {
-              "Make changes to your profile here. Click save when you're done."
-            }
-          </DialogDescription>
+      <DialogContent className="sm:max-w-[unset] w-[auto]">
+        <DialogTitle hidden>{`Exam ${exam.title}`}</DialogTitle>
+        <DialogHeader className="flex flex-row justify-center items-center">
+          <div className="w-[100px] flex flex-row justify-center items-center gap-[5px] bg-yellow-400 py-[5px] px-[10px] rounded-md">
+            <AlarmClock size={20} className="w-1/3" />
+            <div className="w-2/3 text-center">{formatClock(clock)}</div>
+          </div>
         </DialogHeader>
+        <QuestionsCarousel examId={examId} />
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <SendExamButton examId={examId} timeEnd={timeEnd} />
         </DialogFooter>
       </DialogContent>
     </Dialog>

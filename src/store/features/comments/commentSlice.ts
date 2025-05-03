@@ -38,7 +38,6 @@ export const addOneComment = createAsyncThunk(
     { lessonId, comment }: { comment: CommentSlice; lessonId: number },
     { dispatch, fulfillWithValue }
   ) => {
-    console.log(comment);
     dispatch(
       addCommentToLesson({
         id: lessonId,

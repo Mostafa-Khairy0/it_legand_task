@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "@vidstack/react/player/styles/base.css";
-import { StoreProvider, ThemeProvider, Toaster } from "@/components";
+import {
+  StoreProvider,
+  SuccessProvider,
+  ThemeProvider,
+  Toaster,
+} from "@/components";
 
 const fontFamily = Inter({
   variable: "--font-family",
@@ -30,7 +35,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <SuccessProvider>{children}</SuccessProvider>
             <Toaster position="top-center" />
           </ThemeProvider>
         </StoreProvider>

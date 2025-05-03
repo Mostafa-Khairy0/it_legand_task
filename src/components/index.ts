@@ -10,3 +10,4 @@ export * from "./cards";
 export * from "./lists";
 export * from "./dialogs";
 export * from "./forms";
+export * from "./carousels";

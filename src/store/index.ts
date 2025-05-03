@@ -5,7 +5,6 @@ import {
   lessonReducer,
   questionReducer,
   unitReducer,
-  userAnswerReducer,
   userReducer,
 } from "./features";
 
@@ -20,7 +19,6 @@ export const makeStore = () => {
       lessons: lessonReducer,
       questions: questionReducer,
       units: unitReducer,
-      userAnswers: userAnswerReducer,
       users: userReducer,
     },
   });
